@@ -49,6 +49,27 @@ flyway.enabled: true
 ---
 
 spring:
+  profiles: playground
+  datasource:
+    url: ${playground.datasource.url}
+    username: ${playground.datasource.username}
+    password: ${playground.datasource.password}
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+flyway.enabled: true
+
+---
+
+spring:
   profiles: staging
   datasource:
     url: ${staging.datasource.url}
