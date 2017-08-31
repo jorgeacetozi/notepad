@@ -1,12 +1,12 @@
 # Set the base image to java8
-FROM openjdk:8
+FROM openjdk:8-alpine
 
 # File Author / Maintainer
 MAINTAINER Jorge Acetozi
 
 # Define default environment variables
 ENV NOTEPAD_HOME=/opt/notepad
-ENV NOTEPAD_BINARIES=$ARTIFACT_HOME/bin
+ENV NOTEPAD_BINARIES=/opt/notepad/bin
 
 # Create directory
 RUN mkdir -p $NOTEPAD_BINARIES
@@ -27,4 +27,4 @@ RUN chmod 755 $NOTEPAD_BINARIES/entrypoint.sh
 EXPOSE 8080
 
 # Main command
-ENTRYPOINT $NOTEPAD_BINARIES/entrypoint.sh
+ENTRYPOINT ["/bin/sh", "/opt/notepad/bin/entrypoint.sh"]
