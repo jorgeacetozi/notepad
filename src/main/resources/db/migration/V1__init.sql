@@ -1,7 +1,7 @@
 CREATE TABLE note (
     id INTEGER NOT NULL AUTO_INCREMENT, 
-	title VARCHAR(50) NOT NULL, 
-	content text NOT NULL, 
+	title VARCHAR(255) NOT NULL, 
+	content VARCHAR(255) NOT NULL, 
 	word_count INTEGER NOT NULL, 
 	PRIMARY KEY (id)
 );
