@@ -1,6 +1,5 @@
 package com.jorgeacetozi.notepad.note.domain.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +14,6 @@ public class Note {
 	private String title;
 	private String content;
 	
-	@Column(name="word_count")
-	private Integer wordCount;
-	
 	private Note () {
 		
 	}
@@ -25,7 +21,6 @@ public class Note {
 	public Note (String title, String content) {
 		this.title = title;
 		this.content = content;
-		this.wordCount = this.content.split(" ").length;
 	}
 
 	public Integer getId() {
@@ -41,6 +36,6 @@ public class Note {
 	}
 
 	public Integer getWordCount() {
-		return wordCount;
+		return this.content.split(" ").length;
 	}
 }
