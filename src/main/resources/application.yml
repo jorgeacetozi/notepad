@@ -51,9 +51,9 @@ flyway.enabled: true
 spring:
   profiles: playground
   datasource:
-    url: ${playground.datasource.url}
-    username: ${playground.datasource.username}
-    password: ${playground.datasource.password}
+    url: ${playground_datasource_url}
+    username: ${playground_datasource_username}
+    password: ${playground_datasource_password}
     testWhileIdle: true
     validationQuery: SELECT 1
   jpa:
@@ -72,9 +72,9 @@ flyway.enabled: true
 spring:
   profiles: staging
   datasource:
-    url: ${staging.datasource.url}
-    username: ${staging.datasource.username}
-    password: ${staging.datasource.password}
+    url: ${staging_datasource_url}
+    username: ${staging_datasource_username}
+    password: ${staging_datasource_password}
     testWhileIdle: true
     validationQuery: SELECT 1
   jpa:
@@ -93,9 +93,9 @@ flyway.enabled: false
 spring:
   profiles: production
   datasource:
-    url: ${production.datasource.url}
-    username: ${production.datasource.username}
-    password: ${production.datasource.password}
+    url: ${production_datasource_url}
+    username: ${production_datasource_username}
+    password: ${production_datasource_password}
     testWhileIdle: true
     validationQuery: SELECT 1
   jpa:
