@@ -5,15 +5,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Note {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
+	@NotEmpty
 	private String title;
+	@NotEmpty
 	private String content;
 	
+	// Makes Hibernate happy
 	private Note () {
 		
 	}
