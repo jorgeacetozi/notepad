@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+<head>
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+
+		<h3 class="text-center" th:text="#{note.yourNotes}">Your Notes</h3>
+		<hr />
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th th:text="#{note.title}">Title</th>
+					<th th:text="#{note.content}">Content</th>
+					<th th:text="#{note.wordCount}">Word Count</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="note : ${notes}">
+					<td th:text="${note.title}">Kubernetes</td>
+					<td th:text="${note.content}">Best container orchestration
+						tool ever!</td>
+					<td th:text="${note.wordCount}">5</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="modal fade" id="newNoteModal" tabindex="-1" role="dialog"
+			aria-labelledby="newNoteModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="newNoteModalLabel"
+							th:text="#{note.newNote}">New Note</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="newNoteTitle" class="control-label"
+									th:text="#{note.title}">Title</label> <input type="text"
+									class="form-control" id="newNoteTitle" />
+							</div>
+							<div class="form-group">
+								<label for="newNoteContent" class="control-label"
+									th:text="#{note.content}">Content</label>
+								<textarea class="form-control" id="newNoteContent"></textarea>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							th:text="#{note.close}">Close</button>
+						<button id="btnCreateNewNote" type="button"
+							class="btn btn-primary" th:text="#{note.create}">Create</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script layout:fragment="script">
+		$(document).ready(function() {
+
+			var newNoteModal = $("#newNoteModal");
+			var btnCreateNewNote = $("#btnCreateNewNote");
+			var txtNewNoteTitle = $("#newNoteTitle");
+			var txtNewNoteContent = $("#newNoteContent");
+
+			function createNewNote() {
+				var newNote = {
+					'title' : txtNewNoteTitle.val(),
+					'content' : txtNewNoteContent.val()
+				};
+
+				$.ajax({
+					type : "POST",
+					url : "/notes",
+					data : JSON.stringify(newNote),
+					contentType : "application/json",
+					success : function(note) {
+						var $tbody = $("tbody");
+						var $tr = $("<tr />");
+
+						$("<td />").text(note.title).appendTo($tr);
+						$("<td />").text(note.content).appendTo($tr);
+						$("<td />").text(note.wordCount).appendTo($tr);
+
+						$tr.appendTo($tbody);
+						newNoteModal.modal('hide');
+						txtNewNoteTitle.val("");
+						txtNewNoteContent.val("")
+						
+				        noty({
+				            text: "Your note was successfully saved!",
+				            layout: 'top',
+				            type: 'success',
+				            timeout: 5000
+				        });
+					},
+					error(error) {
+				        noty({
+				            text: "Title and Content cannot be empty",
+				            layout: 'top',
+				            type: 'error',
+				            timeout: 5000
+				        });
+					}
+				});
+			}
+			btnCreateNewNote.on("click", createNewNote);
+		})
+	</script>
+
+</body>
+</html>

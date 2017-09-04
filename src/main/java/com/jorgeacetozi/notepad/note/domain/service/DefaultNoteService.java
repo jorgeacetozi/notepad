@@ -1,5 +1,7 @@
 package com.jorgeacetozi.notepad.note.domain.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +22,10 @@ public class DefaultNoteService implements NoteService {
 	@Override
 	public void delete(Note note) {
 		noteRepository.delete(note);
+	}
+
+	@Override
+	public List<Note> findAll() {
+		return noteRepository.findAll();
 	}
 }
