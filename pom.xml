@@ -22,8 +22,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<acceptance.notepad.url>http://localhost:8080</acceptance.notepad.url>
+		<selenium.url>http://localhost:4444/wd/hub</selenium.url>
+        <selenium.browser>firefox</selenium.browser>
 	</properties>
-
+	
 	<scm>
 		<connection>scm:git:git@github.com:jorgeacetozi/notepad.git</connection>
 		<developerConnection>scm:git:git@github.com:jorgeacetozi/notepad.git</developerConnection>
@@ -72,11 +75,39 @@
 			<version>2.2.4</version>
 		</dependency>
 		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>acceptance-tests</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<includes>
+								<include>**/acceptanceTests/**</include>
+							</includes>
+							<systemPropertyVariables>
+								<selenium.url>${selenium.url}</selenium.url>
+								<selenium.browser>${selenium.browser}</selenium.browser>
+								<acceptance.notepad.url>${acceptance.notepad.url}</acceptance.notepad.url>
+							</systemPropertyVariables>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
