@@ -24,15 +24,28 @@
 		<java.version>1.8</java.version>
 		<acceptance.notepad.url>http://localhost:8080</acceptance.notepad.url>
 		<selenium.url>http://localhost:4444/wd/hub</selenium.url>
-        <selenium.browser>firefox</selenium.browser>
+		<selenium.browser>firefox</selenium.browser>
 	</properties>
-	
+
 	<scm>
 		<connection>scm:git:git@github.com:jorgeacetozi/notepad.git</connection>
 		<developerConnection>scm:git:git@github.com:jorgeacetozi/notepad.git</developerConnection>
 		<url>scm:git:git@github.com:jorgeacetozi/notepad.git</url>
 		<tag>HEAD</tag>
 	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>artifactory-releases</name>
+			<url>http://artifactory-service:8081/artifactory/libs-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>artifactory-snapshots</name>
+			<url>http://artifactory-service:8081/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<dependencies>
 		<dependency>
