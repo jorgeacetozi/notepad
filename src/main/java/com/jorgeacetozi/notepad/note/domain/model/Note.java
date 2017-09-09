@@ -43,4 +43,9 @@ public class Note {
 	public Integer getWordCount() {
 		return this.content.split(" ").length;
 	}
+
+	@Override
+	public String toString() {
+		return "Note [id=" + id + ", title=" + title + ", content=" + content + ", wordCount=" + this.getWordCount() + "]";
+	}
 }

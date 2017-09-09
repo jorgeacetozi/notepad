@@ -23,7 +23,7 @@ spring:
   messages:
     cache-seconds: 0
 
-flyway.enabled: true      
+flyway.enabled: true
 
 ---
 
@@ -66,6 +66,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
 flyway.enabled: true
+logging.config: /etc/notepad/logback-spring.xml
 
 ---
 
@@ -87,6 +88,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
 flyway.enabled: true
+logging.config: /etc/notepad/logback-spring.xml
 
 ---
 
@@ -108,3 +110,4 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
 flyway.enabled: true
+logging.config: /etc/notepad/logback-spring.xml
