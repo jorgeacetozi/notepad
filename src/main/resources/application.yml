@@ -86,7 +86,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
-flyway.enabled: false
+flyway.enabled: true
 
 ---
 
@@ -107,4 +107,4 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
-flyway.enabled: false
+flyway.enabled: true
