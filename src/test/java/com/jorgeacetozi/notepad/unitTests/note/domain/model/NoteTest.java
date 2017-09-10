@@ -31,7 +31,14 @@ public class NoteTest {
 		Set<ConstraintViolation<Note>> constraintViolations = validator.validate(note);
 		assertThat(constraintViolations.size(), is(0));
 	}
-	
+
+	@Test
+	public void shouldNotRaiseViolationWhenTitleSubtitleAndContentAreFilled() {
+		Note note = new Note("Unit Tests", "JUnit Framekwork", "Unit tests provide fast feedback");
+		Set<ConstraintViolation<Note>> constraintViolations = validator.validate(note);
+		assertThat(constraintViolations.size(), is(0));
+	}
+
 	@Test
 	public void shouldRaiseViolationWhenTitleIsEmpty() {
 		Note note = new Note("", "Unit tests provide fast feedback");
@@ -45,13 +52,13 @@ public class NoteTest {
 		Set<ConstraintViolation<Note>> constraintViolations = validator.validate(note);
 		assertThat(constraintViolations.size(), is(1));
 	}
-	
+
 	@Test
 	public void shouldCountOneForContentWithSingleWord() {
 		Note note = new Note("Unit Tests", "Xuxa");
 		assertThat(note.getWordCount(), is(1));
 	}
-	
+
 	@Test
 	public void shouldCountWordsFromNoteContent() {
 		Note note = new Note("Unit Tests",

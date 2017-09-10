@@ -12,32 +12,38 @@ import com.jorgeacetozi.notepad.note.domain.model.Note;
 
 public class NewNotePage {
 
-	@FindBy(id="newNote")
+	@FindBy(id = "newNote")
 	private WebElement newNoteModal;
-	
-	@FindBy(id="newNoteTitle")
+
+	@FindBy(id = "newNoteTitle")
 	private WebElement title;
-	
-	@FindBy(id="newNoteContent")
+
+	@FindBy(id = "newNoteSubtitle")
+	private WebElement subtitle;
+
+	@FindBy(id = "newNoteContent")
 	private WebElement content;
-	
-	@FindBy(id="btnCreateNewNote")
+
+	@FindBy(id = "btnCreateNewNote")
 	private WebElement createNoteButton;
-	
+
 	private Long sleep = 2000l;
-	
+
 	private WebDriver driver;
-	
-    public NewNotePage(WebDriver driver) {
-    	this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-	
+
+	public NewNotePage(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
+
 	public void create(Note newNote) throws InterruptedException {
 		newNoteModal.click();
 		sleep(sleep);
-		
+
 		title.sendKeys(newNote.getTitle());
+		if (newNote.getSubtitle() != null) {
+			subtitle.sendKeys(newNote.getSubtitle());
+		}
 		content.sendKeys(newNote.getContent());
 		createNoteButton.click();
 		sleep(sleep);
