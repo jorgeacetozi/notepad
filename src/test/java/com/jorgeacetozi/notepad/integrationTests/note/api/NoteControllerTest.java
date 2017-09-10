@@ -28,31 +28,47 @@ import com.jorgeacetozi.notepad.note.domain.model.Note;
 @ActiveProfiles("test")
 @WebAppConfiguration
 public class NoteControllerTest {
-	
-    @Autowired
-    private WebApplicationContext wac;
-	
-    private MockMvc mockMvc;
 
-    @Before
-    public void setup() {
-    	this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
-    }
-	
-    @Test
-    public void shouldCreateNote() throws Exception {
-    	Note note = new Note("Unit Tests", "Unit tests provide fast feedback, but they test only an isolated unit of code");
-    	
-        this.mockMvc.perform(
-	        			post("/notes")
-	        			.contentType(MediaType.APPLICATION_JSON)
-	        			.content(new ObjectMapper().writeValueAsString(note))
-	        		)
-	                .andDo(print())
-	                .andExpect(status().isCreated())
-        			.andExpect(jsonPath("$.id", is(notNullValue())))
-        			.andExpect(jsonPath("$.title", is(note.getTitle())))
-        			.andExpect(jsonPath("$.content", is(note.getContent())))
-        			.andExpect(jsonPath("$.wordCount", is(note.getWordCount())));
-    }
+	@Autowired
+	private WebApplicationContext wac;
+
+	private MockMvc mockMvc;
+
+	@Before
+	public void setup() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+	}
+
+	@Test
+	public void shouldCreateNoteWithTitleAndContentAndReturnHttp201Created() throws Exception {
+		Note note = new Note("Integration Tests", "Test the external integrations such as databases or web services.");
+
+		this.mockMvc
+				.perform(post("/notes").contentType(MediaType.APPLICATION_JSON)
+						.content(new ObjectMapper().writeValueAsString(note)))
+				.andDo(print()).andExpect(status().isCreated()).andExpect(jsonPath("$.id", is(notNullValue())))
+				.andExpect(jsonPath("$.title", is(note.getTitle())))
+				.andExpect(jsonPath("$.content", is(note.getContent())))
+				.andExpect(jsonPath("$.wordCount", is(note.getWordCount())));
+	}
+
+	@Test
+	public void shouldNotCreateNoteWhenTitleIsEmptyAndReturnHttp400BadRequest() throws Exception {
+		Note note = new Note("", "Test the external integrations such as databases or web services.");
+
+		this.mockMvc
+				.perform(post("/notes").contentType(MediaType.APPLICATION_JSON)
+						.content(new ObjectMapper().writeValueAsString(note)))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
+
+	@Test
+	public void shouldNotCreateNoteWhenContentIsEmptyAndReturnHttp400BadRequest() throws Exception {
+		Note note = new Note("Integration Tests", "");
+
+		this.mockMvc
+				.perform(post("/notes").contentType(MediaType.APPLICATION_JSON)
+						.content(new ObjectMapper().writeValueAsString(note)))
+				.andDo(print()).andExpect(status().isBadRequest());
+	}
 }
