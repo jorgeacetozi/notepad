@@ -9,22 +9,32 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Note {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
+
 	@NotEmpty
 	private String title;
+
+	private String subtitle;
+
 	@NotEmpty
 	private String content;
-	
+
 	// Makes Hibernate happy
-	private Note () {
-		
+	private Note() {
+
 	}
-	
-	public Note (String title, String content) {
+
+	public Note(String title, String content) {
 		this.title = title;
+		this.content = content;
+	}
+
+	public Note(String title, String subtitle, String content) {
+		this.title = title;
+		this.subtitle = subtitle;
 		this.content = content;
 	}
 
@@ -34,6 +44,10 @@ public class Note {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public String getSubtitle() {
+		return subtitle;
 	}
 
 	public String getContent() {
@@ -46,6 +60,7 @@ public class Note {
 
 	@Override
 	public String toString() {
-		return "Note [id=" + id + ", title=" + title + ", content=" + content + ", wordCount=" + this.getWordCount() + "]";
+		return "Note [id=" + id + ", title=" + title + ", subtitle=" + subtitle + ", content=" + content
+				+ ", wordCount=" + this.getWordCount() + "]";
 	}
 }

@@ -53,6 +53,21 @@ public class NoteControllerTest {
 	}
 
 	@Test
+	public void shouldCreateNoteWithTitleSubtitleAndContentAndReturnHttp201Created() throws Exception {
+		Note note = new Note("Integration Tests", "Slower Feedback than Unit Tests",
+				"Test the external integrations such as databases or web services.");
+
+		this.mockMvc
+				.perform(post("/notes").contentType(MediaType.APPLICATION_JSON)
+						.content(new ObjectMapper().writeValueAsString(note)))
+				.andDo(print()).andExpect(status().isCreated()).andExpect(jsonPath("$.id", is(notNullValue())))
+				.andExpect(jsonPath("$.title", is(note.getTitle())))
+				.andExpect(jsonPath("$.subtitle", is(note.getSubtitle())))
+				.andExpect(jsonPath("$.content", is(note.getContent())))
+				.andExpect(jsonPath("$.wordCount", is(note.getWordCount())));
+	}
+
+	@Test
 	public void shouldNotCreateNoteWhenTitleIsEmptyAndReturnHttp400BadRequest() throws Exception {
 		Note note = new Note("", "Test the external integrations such as databases or web services.");
 
