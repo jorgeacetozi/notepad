@@ -40,7 +40,7 @@ public class NoteControllerTest {
     }
 	
     @Test
-    public void shouldCreateNote() throws Exception {
+    public void shouldCreateNoteAndReturnHttp201Created() throws Exception {
     	Note note = new Note("Unit Tests", "Unit tests provide fast feedback, but they test only an isolated unit of code");
     	
         this.mockMvc.perform(
@@ -54,5 +54,31 @@ public class NoteControllerTest {
         			.andExpect(jsonPath("$.title", is(note.getTitle())))
         			.andExpect(jsonPath("$.content", is(note.getContent())))
         			.andExpect(jsonPath("$.wordCount", is(note.getWordCount())));
+    }
+    
+    @Test
+    public void shouldNotCreateNoteWhenTitleIsEmptyAndReturnHttp400BadRequest() throws Exception {
+    	Note note = new Note("", "Unit tests provide fast feedback, but they test only an isolated unit of code");
+    	
+        this.mockMvc.perform(
+	        			post("/notes")
+	        			.contentType(MediaType.APPLICATION_JSON)
+	        			.content(new ObjectMapper().writeValueAsString(note))
+	        		)
+	                .andDo(print())
+	                .andExpect(status().isBadRequest());
+    }
+    
+    @Test
+    public void shouldNotCreateNoteWhenContentIsEmptyAndReturnHttp400BadRequest() throws Exception {
+    	Note note = new Note("Unit Tests", "");
+    	
+        this.mockMvc.perform(
+	        			post("/notes")
+	        			.contentType(MediaType.APPLICATION_JSON)
+	        			.content(new ObjectMapper().writeValueAsString(note))
+	        		)
+	                .andDo(print())
+	                .andExpect(status().isBadRequest());
     }
 }

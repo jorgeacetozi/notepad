@@ -27,7 +27,7 @@ public class NoteServiceTest {
 	private Note note;
 	
 	@Before
-	public void setup() {
+	public void setUp() {
 		note = new Note("Kubernetes", "Best container orchestration tool ever");
 	}
 	
@@ -37,7 +37,7 @@ public class NoteServiceTest {
 	}
 	
 	@Test
-	public void shouldCreateNote() {
+	public void shouldCreateNoteWithTitleAndContent() {
 		Note createdNote = noteService.create(note);
 		assertThat(createdNote.getId(), notNullValue());
 		assertThat(createdNote.getWordCount(), is(5));
