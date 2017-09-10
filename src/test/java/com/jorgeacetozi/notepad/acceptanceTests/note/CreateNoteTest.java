@@ -43,14 +43,21 @@ public class CreateNoteTest {
 		newNotePage.create(newNote);
 		assertThat(newNotePage.getMessage(), equalTo(newNoteSuccessMessage));
 	}
-	
+
+	@Test
+	public void shouldCreateNewNoteWithTitleSubtitleAndContent() throws InterruptedException {
+		Note newNote = new Note("Acceptance Test", "Selenium Framework", "Creating note from the acceptance test");
+		newNotePage.create(newNote);
+		assertThat(newNotePage.getMessage(), equalTo(newNoteSuccessMessage));
+	}
+
 	@Test
 	public void shouldNotCreateNewNoteWhenTitleIsEmpty() throws InterruptedException {
 		Note newNote = new Note("", "Creating note from the acceptance test");
 		newNotePage.create(newNote);
 		assertThat(newNotePage.getMessage(), equalTo(newNoteFailMessage));
 	}
-	
+
 	@Test
 	public void shouldNotCreateNewNoteWhenContentIsEmpty() throws InterruptedException {
 		Note newNote = new Note("Acceptance Test", "");
