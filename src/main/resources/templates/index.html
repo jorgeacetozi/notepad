@@ -13,6 +13,7 @@
 			<thead>
 				<tr>
 					<th th:text="#{note.title}">Title</th>
+					<th th:text="#{note.subtitle}">Subtitle</th>
 					<th th:text="#{note.content}">Content</th>
 					<th th:text="#{note.wordCount}">Word Count</th>
 				</tr>
@@ -21,6 +22,7 @@
 			<tbody>
 				<tr th:each="note : ${notes}">
 					<td th:text="${note.title}">Kubernetes</td>
+					<td th:text="${note.subtitle}">Orchestration Tool</td>
 					<td th:text="${note.content}">Best container orchestration
 						tool ever!</td>
 					<td th:text="${note.wordCount}">5</td>
@@ -48,6 +50,11 @@
 									class="form-control" id="newNoteTitle" />
 							</div>
 							<div class="form-group">
+								<label for="newNoteSubtitle" class="control-label"
+									th:text="#{note.subtitle}">Subtitle</label> <input type="text"
+									class="form-control" id="newNoteSubtitle" />
+							</div>
+							<div class="form-group">
 								<label for="newNoteContent" class="control-label"
 									th:text="#{note.content}">Content</label>
 								<textarea class="form-control" id="newNoteContent"></textarea>
@@ -71,11 +78,13 @@
 			var newNoteModal = $("#newNoteModal");
 			var btnCreateNewNote = $("#btnCreateNewNote");
 			var txtNewNoteTitle = $("#newNoteTitle");
+			var txtNewNoteSubtitle = $("#newNoteSubtitle");
 			var txtNewNoteContent = $("#newNoteContent");
 
 			function createNewNote() {
 				var newNote = {
 					'title' : txtNewNoteTitle.val(),
+					'subtitle' : txtNewNoteSubtitle.val(),
 					'content' : txtNewNoteContent.val()
 				};
 
@@ -89,12 +98,14 @@
 						var $tr = $("<tr />");
 
 						$("<td />").text(note.title).appendTo($tr);
+						$("<td />").text(note.subtitle).appendTo($tr);
 						$("<td />").text(note.content).appendTo($tr);
 						$("<td />").text(note.wordCount).appendTo($tr);
 
 						$tr.appendTo($tbody);
 						newNoteModal.modal('hide');
 						txtNewNoteTitle.val("");
+						txtNewNoteSubtitle.val("");
 						txtNewNoteContent.val("")
 						
 				        noty({
