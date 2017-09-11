@@ -24,6 +24,7 @@ spring:
     cache-seconds: 0
 
 flyway.enabled: true
+endpoints.sensitive: false
 
 ---
 
@@ -45,15 +46,16 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
 flyway.enabled: true
+endpoints.sensitive: false
 
 ---
 
 spring:
-  profiles: playground
+  profiles: testing
   datasource:
-    url: ${playground_datasource_url}
-    username: ${playground_datasource_username}
-    password: ${playground_datasource_password}
+    url: ${testing_datasource_url}
+    username: ${testing_datasource_username}
+    password: ${testing_datasource_password}
     testWhileIdle: true
     validationQuery: SELECT 1
   jpa:
@@ -66,6 +68,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
 flyway.enabled: true
+endpoints.sensitive: false
 logging.config: /etc/notepad/logback-spring.xml
 
 ---
@@ -88,6 +91,7 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
 flyway.enabled: true
+endpoints.sensitive: false
 logging.config: /etc/notepad/logback-spring.xml
 
 ---
@@ -110,4 +114,5 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
 
 flyway.enabled: true
+endpoints.sensitive: false
 logging.config: /etc/notepad/logback-spring.xml
