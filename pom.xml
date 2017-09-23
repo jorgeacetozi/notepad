@@ -120,6 +120,25 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>smoke-tests</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<configuration>
+							<test>**/acceptanceTests/note/CreateNoteTest#shouldCreateNewNoteWithTitleAndContent</test>
+							<systemPropertyVariables>
+								<selenium.url>${selenium.url}</selenium.url>
+								<selenium.browser>${selenium.browser}</selenium.browser>
+								<acceptance.notepad.url>${acceptance.notepad.url}</acceptance.notepad.url>
+							</systemPropertyVariables>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 	<build>
