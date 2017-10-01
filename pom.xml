@@ -186,7 +186,6 @@
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<configuration>
 					<includes>
-						<include>**/unitTests/**</include>
 						<include>**/integrationTests/**</include>
 					</includes>
 				</configuration>
