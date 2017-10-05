@@ -28,10 +28,12 @@ endpoints.sensitive: false
 
 ---
 
+test_mysql_host: ${ENV_TEST_MYSQL_HOST:localhost}
+
 spring:
   profiles: test
   datasource:
-    url: jdbc:mysql://localhost:3306/notepad
+    url: jdbc:mysql://${test_mysql_host}:3306/notepad
     username: root
     password: root
     testWhileIdle: true
