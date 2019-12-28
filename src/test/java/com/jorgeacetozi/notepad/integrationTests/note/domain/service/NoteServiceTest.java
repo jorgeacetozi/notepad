@@ -20,24 +20,32 @@ import com.jorgeacetozi.notepad.note.domain.service.NoteService;
 @SpringBootTest
 @ActiveProfiles("test")
 public class NoteServiceTest {
-	
+
 	@Autowired
 	private NoteService noteService;
-	
+
 	private Note note;
-	
+
 	@Before
 	public void setUp() {
 		note = new Note("Kubernetes", "Best container orchestration tool ever");
 	}
-	
+
 	@After
 	public void destroy() {
 		noteService.delete(note);
 	}
-	
+
 	@Test
 	public void shouldCreateNoteWithTitleAndContent() {
+		Note createdNote = noteService.create(note);
+		assertThat(createdNote.getId(), notNullValue());
+		assertThat(createdNote.getWordCount(), is(5));
+	}
+
+	@Test
+	public void shouldCreateNoteWithTitleSubtitleAndContent() {
+		note = new Note("Kubernetes", "Easy Container Orchestration", "Best container orchestration tool ever");
 		Note createdNote = noteService.create(note);
 		assertThat(createdNote.getId(), notNullValue());
 		assertThat(createdNote.getWordCount(), is(5));
