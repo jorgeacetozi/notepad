@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.jorgeacetozi</groupId>
 	<artifactId>notepad</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>notepad</name>
@@ -28,9 +27,9 @@
 	</properties>
 
 	<scm>
-		<connection>scm:git:git@github.com:jorgeacetozi/notepad.git</connection>
-		<developerConnection>scm:git:git@github.com:jorgeacetozi/notepad.git</developerConnection>
-		<url>scm:git:git@github.com:jorgeacetozi/notepad.git</url>
+		<connection>scm:git:git@github.com:princepaulson1/notepad.git</connection>
+		<developerConnection>scm:git:git@github.com:princepaulson1/notepad.git</developerConnection>
+		<url>scm:git:git@github.com:princepaulson1/notepad.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -38,12 +37,12 @@
 		<repository>
 			<id>central</id>
 			<name>artifactory-releases</name>
-			<url>http://artifactory-service:8081/artifactory/libs-release-local</url>
+			<url>http://192.168.99.101:8081/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>artifactory-snapshots</name>
-			<url>http://artifactory-service:8081/artifactory/libs-snapshot-local</url>
+			<url>http://192.168.99.101:8081/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -103,6 +102,20 @@
 			<id>acceptance-tests</id>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>repackage</goal>
+								</goals>
+								<configuration>
+									<skip>true</skip>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-surefire-plugin</artifactId>
