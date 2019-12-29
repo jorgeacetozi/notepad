@@ -4,7 +4,7 @@
 
 	<groupId>com.jorgeacetozi</groupId>
 	<artifactId>notepad</artifactId>
-	<version>1.1.1-SNAPSHOT</version>
+	<version>1.2.0</version>
 	<packaging>jar</packaging>
 
 	<name>notepad</name>
@@ -30,7 +30,7 @@
 		<connection>scm:git:git@github.com:princepaulson1/notepad.git</connection>
 		<developerConnection>scm:git:git@github.com:princepaulson1/notepad.git</developerConnection>
 		<url>scm:git:git@github.com:princepaulson1/notepad.git</url>
-		<tag>HEAD</tag>
+		<tag>notepad-1.2.0</tag>
 	</scm>
 
 	<distributionManagement>
