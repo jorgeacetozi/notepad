@@ -25,12 +25,21 @@
 		<acceptance.notepad.url>http://localhost:8080</acceptance.notepad.url>
 		<selenium.url>http://localhost:4444/wd/hub</selenium.url>
 		<selenium.browser>firefox</selenium.browser>
+		<project.scm.id>github</project.scm.id>
 	</properties>
+	<!--
+    <scm>
+      <connection>scm:git:git@github.com:helmi78/notepad.git</connection>
+      <developerConnection>scm:git:git@github.com:helmi78/notepad.git</developerConnection>
+      <url>scm:git:git@github.com:helmi78/notepad.git</url>
+      <tag>HEAD</tag>
+    </scm>
+     -->
 
 	<scm>
-		<connection>scm:git:git@github.com:helmi78/notepad.git</connection>
-		<developerConnection>scm:git:git@github.com:helmi78/notepad.git</developerConnection>
-		<url>scm:git:git@github.com:helmi78/notepad.git</url>
+		<connection>scm:git:https://github.com/helmi78/notepad.git</connection>
+		<developerConnection>scm:git:https://github.com/helmi78/notepad.git</developerConnection>
+		<url>scm:git:https://github.com/helmi78/notepad.git</url>
 		<tag>HEAD</tag>
 	</scm>
 
